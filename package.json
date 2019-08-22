@@ -7,6 +7,7 @@
     "concurrently": "^4.1.2",
     "env2": "^2.2.2",
     "express": "^4.17.1",
+    "http-proxy-middleware": "^0.19.1",
     "jsonwebtoken": "^8.5.1",
     "path": "^0.12.7",
     "pg-promise": "^9.0.3",
@@ -44,6 +45,5 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
-  },
-  "proxy": "https://127.0.0.1:5000"
+  }
 }

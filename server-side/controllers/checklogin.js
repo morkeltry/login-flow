@@ -7,7 +7,7 @@ const isLoggedIn = (req, res) => {
   // yup
  res.type('text/html');
  res.status(200);
- res.send('<p>Express default / route - not using static files for this route.</p>');
+ res.send('<h1>Login route.</h1>');
   // res.render('home', { params : {} });
 }
 
