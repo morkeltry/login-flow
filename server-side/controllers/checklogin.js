@@ -1,6 +1,6 @@
 const jwt = require ('jsonwebtoken');
 const cookieParser = require ('cookie-parser');
-require ('env2')('./.env');           //path is relative to run directory, not this file.
+require ('env2')('./.env');
 const db = require ('../database/db_queries');
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -34,7 +34,6 @@ const isLoggedIn = async (req, res) => {
   else {
     const loggedInUser = await db.attemptLogin (req.query.username, req.query.password);
     console.log(loggedInUser);
-
 
 
 
