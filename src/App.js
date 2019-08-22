@@ -1,17 +1,24 @@
 import React from 'react';
-import cookie from 'react-cookie';
+import { useCookies } from 'react-cookie';
 import './App.css';
 
 import config from "./config/config";
 
 function App() {
+  const [cookies, setCookie] = useCookies('stuff');
+
   console.log(config);
+  console.log(cookies);
+  console.log(`Welcome ${cookies}`);
+  setCookie ('stuff', 'Things');
+  console.log(cookies);
 
   return (
-    <div className="App">
+    <div className="Welcome">
       <header className="App-header">
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Welcome { cookies.loggedInUser } <br/>
+          Stuff { cookies.stuff }
         </p>
         <a
           className="App-link"

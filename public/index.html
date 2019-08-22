@@ -18,6 +18,7 @@
          https://tylercipriani.com/blog/2016/09/25/the-14kb-in-the-tcp-initial-window/
     -->
     <script>
+      document.cookie = 'loggedInUser="Me"'
       function isLoginCookie(item) { return item.indexOf('loggedInUser=') >= 0 };
       if (document.cookie.split(';').filter(isLoginCookie).length) {
         console.log('Got cookie!');
