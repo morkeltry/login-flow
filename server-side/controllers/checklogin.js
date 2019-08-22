@@ -15,8 +15,12 @@ const isLoggedIn = async (req, res) => {
   console.log('COOKIE!:',cookies)
   if (cookies.jwt) {
     try {
-      jwt.verify(cookies.jwt, JWT_SECRET)
-        .then (()=>{console.log('CHECKED IT!')});
+      const deets = await jwt.verify(cookies.jwt, JWT_SECRET)
+        // .then ( (deets)=> {
+          console.log('GWT from JWT:', deets);
+      return deets
+
+        // });
     }
     catch (err) {
       console.log('NUP :P');
@@ -32,6 +36,7 @@ const isLoggedIn = async (req, res) => {
   }
 
   else {
+    console.log('Attempting login');
     const loggedInUser = await db.attemptLogin (req.query.username, req.query.password);
     console.log(loggedInUser);
 

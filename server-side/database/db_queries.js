@@ -7,6 +7,7 @@ const newUser = async (username, password) => {
     username = username.toLowerCase();
     const salt = await bcrypt.genSalt();
     const hashedPw = await bcrypt.hash (password, salt);
+    console.log(salt,hashedPw);
     const insert = {
       text: "INSERT INTO users VALUES ($1, $2, $3, $4)",
       values: [ username, salt, hashedPw, Date.now() ]
@@ -44,25 +45,28 @@ const attemptLogin = async (username, password) => {
       values: [ username ]
     };
     const saltResult = await db.query (lookupSalt);
+    console.log('Checking with salt:',saltResult);
     if (!saltResult.length)
       throw new Error('User not found');
     const hashedPw = await bcrypt.hash (password, saltResult[0].salt);
+    console.log('hashes:',saltResult,hashedPw);
     const checkUserPw = {
-      text: "SELECT salt FROM users WHERE username = $1 AND hashedPw = $2 ",
+      text: "SELECT salt FROM users WHERE username = $1 AND hashedPw = $2",
       values: [ username, hashedPw ]
     };
     const result = await db.query (checkUserPw);
+    console.log('MATCH!');
     if (!result.length)
       throw new Error('User/password do not match');
 
     const updateLogin = {
-      text: "INSERT INTO users (lastLogin) VALUES ($1)",
-      values: [ Date.now() ]
+      text: "UPDATE users SET lastLogin = $1 WHERE username = $2",
+      values: [ Date.now(), username ]
     };
-    if (!result.length) {
-      db.query (updateLogin);
-      return result[0].username;
-    }
+    if (result.length) {
+      await db.query (updateLogin);
+      return username;
+    } else
     return null;
   }
   catch (err) {
