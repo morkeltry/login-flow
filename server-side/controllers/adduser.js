@@ -1,4 +1,3 @@
-
 require ('env2')('./.env');           //path is relative to run directory, not this file.
 const db = require ('../database/db_queries');
 
@@ -22,10 +21,8 @@ const addUser = async (req, res) => {
      res.send('<h1>Sorry - that username is taken!</h1>');
      return
    };
-    const result = await db.newUser (req.query.username, req.query.password);
-    console.log('NewUser result:',result);
 
-
+  const result = await db.newUser (req.query.username, req.query.password);
 
   res.type('text/html');
   res.status(200);

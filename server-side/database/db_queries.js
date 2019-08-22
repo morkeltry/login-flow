@@ -23,7 +23,6 @@ const newUser = async (username, password) => {
 
 const userExists = async (username) => {
   try {
-    console.log('Checking DB for user');
     username = username.toLowerCase();
     const lookupUser = {
       text: "SELECT username FROM users WHERE username = $1",
@@ -39,7 +38,6 @@ const userExists = async (username) => {
 
 const attemptLogin = async (username, password) => {
   try {
-    console.log('Checking DB');
     username = username.toLowerCase();
     const lookupSalt = {
       text: "SELECT salt FROM users WHERE username = $1",

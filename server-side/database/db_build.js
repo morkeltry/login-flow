@@ -1,8 +1,10 @@
 const path = require('path');
-const { queryFile } = require('pg-promise');
+const { QueryFile } = require('pg-promise');
 const db = require('./db_connection');
 
-const sql = file => queryFile(path.join(__dirname, file), { minify: true });
+console.log(QueryFile);
+
+const sql = file => new QueryFile(path.join(__dirname, file), { minify: true });
 
 const build = sql('./db_build.sql');
 
