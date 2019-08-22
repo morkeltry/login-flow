@@ -3,12 +3,34 @@
   <head>
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="canonical" href="%PUBLIC_URL%/login.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
       content="Web site created using create-react-app"
     />
+    <!-- Inline script tag to check precondition
+         - if this app was in production rather than bundled in the webpack-dev-server,
+         this file would be served before any external .js files (including React).
+         Performing the check inline allows us to begin the redirect before the client's ACK
+         of this file reaches the server.
+         https://tylercipriani.com/blog/2016/09/25/the-14kb-in-the-tcp-initial-window/
+    -->
+    <script>
+      function isLoginCookie(item) { return item.indexOf('loggedInUser=') >= 0 };
+      if (document.cookie.split(';').filter(isLoginCookie).length) {
+        console.log('Got cookie!');
+      } else {
+        window.location.replace('/login.html');
+      }
+
+      // This should be done server side, but this app is a mockup in development ;)
+      // if (location.protocol !== 'https:'){
+      //   location.protocol = 'https:'
+      // }
+    </script>
+
     <link rel="apple-touch-icon" href="logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
