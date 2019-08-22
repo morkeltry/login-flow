@@ -1,8 +1,12 @@
 import React from 'react';
-import cookie from "react-cookie";
+import cookie from 'react-cookie';
 import './App.css';
 
+import config from "./config/config";
+
 function App() {
+  console.log(config);
+
   return (
     <div className="App">
       <header className="App-header">
