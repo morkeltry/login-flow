@@ -1,9 +1,9 @@
-const pgp = require('pg-promise')();
+const pgp = require('pg-promise')();  // parametrises queries, prevents SQL injection - no worries :)
 
 const url = require('url');
 require ('env2')('./.env');           //path is relative to run directory, not this file.
 
-let DB_URL = process.env.DATABASE_URL;
+const DB_URL = process.env.DATABASE_URL;
 
 console.log('DB_URL',DB_URL);
 

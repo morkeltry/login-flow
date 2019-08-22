@@ -5,6 +5,7 @@
   "dependencies": {
     "bcrypt": "^3.0.6",
     "concurrently": "^4.1.2",
+    "cookie-parser": "^1.4.4",
     "env2": "^2.2.2",
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.19.1",

@@ -20,6 +20,7 @@ const newUser = async (username, password) => {
 
 const attemptLogin = async (username, password) => {
   try {
+    console.log('Checking DB');
     username = username.toLowerCase();
     const lookupSalt = {
       text: "SELECT salt FROM users WHERE username EQUALS $1",
