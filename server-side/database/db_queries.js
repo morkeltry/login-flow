@@ -59,13 +59,14 @@ const attemptLogin = async (username, password) => {
     if (!result.length)
       throw new Error('User/password do not match');
 
+    const loginTime = Date.now();
     const updateLogin = {
       text: "UPDATE users SET lastLogin = $1 WHERE username = $2",
-      values: [ Date.now(), username ]
+      values: [ loginTime, username ]
     };
     if (result.length) {
       await db.query (updateLogin);
-      return username;
+      return { username, loginTime };
     } else
     return null;
   }
